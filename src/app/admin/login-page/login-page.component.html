@@ -1,0 +1,22 @@
+<form [formGroup]='form' (ngSubmit)="submit()">
+    <h1>Login as administrator</h1>
+    <div class="form-control">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email">
+        <div *ngIf="form.get('email').touched && form.get('email').invalid" class="validation">
+            <small *ngIf="form.get('email').errors.required">Введите E-Mail</small>
+            <small *ngIf="form.get('email').errors.email">Введите корректный E-Mail </small>
+        </div>
+    </div>
+
+    <div class="form-control">
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password">
+        <div *ngIf="form.get('password').touched && form.get('password').invalid" class="validation">
+            <small *ngIf="form.get('password').errors.required">Введите</small>
+            <small *ngIf="form.get('password').errors.minlength">Password must be {{form.get('password').errors.minlength.requiredLength}} </small>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid || submitted">Logon</button>
+</form>
+<p *ngIf="error">{{error}}</p>
